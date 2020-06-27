@@ -20,7 +20,10 @@ class SetupEnvironment:
             self.logger.debug(requests_install_stream.read())
             self.logger.debug("Preparing for BeautifulSoup Installation")
             beautifulSoap_install_stream = self.os.popen('pip install bs4')
-            self.logger.debug(beautifulSoap_install_stream.read())    
+            self.logger.debug(beautifulSoap_install_stream.read())
+            self.logger.debug("Preparing for JProperties Installation")
+            jproperties_install_stream = self.os.popen('pip install jproperties')
+            self.logger.debug(jproperties_install_stream.read())    
         except Exception :
             self.logger.error("Environment could not be setup due to System Error. Please provide required privileges to run the Script")
             sys.exit()

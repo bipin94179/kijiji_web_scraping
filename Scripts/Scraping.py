@@ -10,6 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import os
+from FetchProperties import FetchProperties
 
 """ Setting Basic Logging Options """
 
@@ -21,32 +22,41 @@ logging.basicConfig(filename=LOG_FILENAME, filemode='a', format='%(asctime)s : %
 logger = logging.getLogger('dev')
 logger.setLevel(logging.DEBUG)
 
-url = "https://www.kijiji.ca"
+""" Fetching Configuration From Properties File """
+
+fetchProperties = FetchProperties()
+configuration = fetchProperties.main()
+
+""" Initializing Data From Properties file to Execute Web Scraping """
+
+url = configuration.get("url").data
 browser = webdriver.Chrome()
 browser.get(url)
 
-browser.find_element(By.LINK_TEXT, "Alberta").click()
-browser.find_element(By.LINK_TEXT, "Calgary").click()
+browser.find_element(By.LINK_TEXT, configuration.get("province").data).click()
+browser.find_element(By.LINK_TEXT, configuration.get("area").data).click()
 
 browser.find_element_by_id("LocUpdate").click()
 
-""" WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "SearchSubmit"))) """
 time.sleep(2)
-browser.find_element_by_id("SearchKeyword").send_keys("Office Space")
+browser.find_element_by_id("SearchKeyword").send_keys(configuration.get("keyword").data)
 browser.find_element_by_name("SearchSubmit").click()
 
-url_scrap = browser.current_url
+time.sleep(20)
+browser.find_element_by_xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[1]/div/ul[3]/ul/li[2]/a").click()
 
-response = requests.get(url_scrap)
+""" Reached Advertisement Page To Begin Data Scraping """
+time.sleep(20)
+advertisements = browser.find_elements_by_class_name("regular-ad")
+print(len(advertisements))
 
-soup = BeautifulSoup(response.text, 'html.parser')
+ad_Links = []
 
-post = soup.find_all('a', {'href': re.compile(
-    r'["/-a-zA-Z0-9]*')}, {'class_': re.compile(r'title')})
+for ads in advertisements :
+    ad_Links.append(ads.find_element_by_tag_name("a").get_attribute('href'))
+    print(ads.find_element_by_tag_name("a").get_attribute('href'))
 
-fi = open('file.txt', 'w')
+for link in ad_Links :
+    browser.get(link)
 
-for tag in post:
-    fi.write(str(tag.get_text()))
-
-fi.close()
+print(len(ad_Links))
