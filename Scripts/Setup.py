@@ -7,7 +7,11 @@ from datetime import datetime
 from SetupEnvironment import SetupEnvironment
 
 """ Setting Basic Logging Options """
-LOG_FILENAME = datetime.now().strftime('../Logs/scraping_app_%d_%m_%Y.log')
+
+if not os.path.exists('../Logs') :
+    os.makedirs('../Logs')
+
+LOG_FILENAME = datetime.now().strftime('../Logs/setup_app_%d_%m_%Y.log')
 logging.basicConfig(filename=LOG_FILENAME, filemode='a', format='%(asctime)s : %(levelname)s : %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 logger = logging.getLogger('dev')
 logger.setLevel(logging.DEBUG)
