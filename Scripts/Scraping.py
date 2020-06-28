@@ -11,6 +11,7 @@ import re
 import os
 from FetchProperties import FetchProperties
 from Extract import Extract
+import math
 
 """ Setting Basic Logging Options """
 
@@ -73,7 +74,7 @@ showing = browser.find_element_by_class_name("showing")
 showing_text = showing.text
 total_advertisements = showing_text.split(' ')[5]
 current_advertisements = showing_text.split(' ')[3]
-total_pages = int(total_advertisements)/int(current_advertisements)
+total_pages = math.ceil(int(total_advertisements)/int(current_advertisements))
 print(showing_text)
 print(total_advertisements)
 print(current_advertisements)
