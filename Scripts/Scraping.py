@@ -7,10 +7,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 import time
 import requests
-from bs4 import BeautifulSoup
 import re
 import os
 from FetchProperties import FetchProperties
+from Extract import Extract
 
 """ Setting Basic Logging Options """
 
@@ -31,35 +31,57 @@ configuration = fetchProperties.main()
 
 url = configuration.get("url").data
 browser = webdriver.Chrome()
-browser.get(url)
-
-browser.find_element(By.LINK_TEXT, configuration.get("province").data).click()
-browser.find_element(By.LINK_TEXT, configuration.get("area").data).click()
-
-browser.find_element_by_id("LocUpdate").click()
-
-time.sleep(2)
-browser.find_element_by_id("SearchKeyword").send_keys(configuration.get("keyword").data)
-browser.find_element_by_name("SearchSubmit").click()
-
-time.sleep(20)
 wait = WebDriverWait(browser, 10)
-element = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/div[3]/div[3]/div[2]/div[1]/div/ul[3]/ul/li[2]/a')))
-element.click()
+browser.get(url)
+browser.maximize_window()
 
-""" Reached Advertisement Page To Begin Data Scraping """
+""" Updating Location """
 
-time.sleep(20)
+time.sleep(10)
+
+province = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, configuration.get("province").data)))
+province.click()
+
+area = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, configuration.get("area").data)))
+area.click()
+
+location_update = wait.until(EC.element_to_be_clickable((By.ID, 'LocUpdate')))
+location_update.click()
+
+""" Searching Keywords """
+
+time.sleep(10)
+
+search_box = wait.until(EC.element_to_be_clickable((By.ID, 'SearchKeyword')))
+search_box.send_keys(configuration.get("keyword").data)
+
+search_button = wait.until(EC.element_to_be_clickable((By.NAME, 'SearchSubmit')))
+search_button.click()
+
+""" Get Wanted Advertisements """
+
+attribute_selected_elements = browser.find_elements_by_tag_name("a")
+for selected_elements in attribute_selected_elements :
+    if selected_elements.get_attribute('data-event') == "wantedSelection" :
+        wanted_link = selected_elements.get_attribute('href')
+        browser.get(wanted_link)
+        break
+
+""" Fetching Total No Of Pages """
+
+showing = browser.find_element_by_class_name("showing")
+showing_text = showing.text
+total_advertisements = showing_text.split(' ')[5]
+current_advertisements = showing_text.split(' ')[3]
+total_pages = int(total_advertisements)/int(current_advertisements)
+print(showing_text)
+print(total_advertisements)
+print(current_advertisements)
+print(total_pages)
+
+""" Fetching Advertisement Links """
+
+advertisment_links = []
 advertisements = browser.find_elements_by_class_name("regular-ad")
-print(len(advertisements))
-
-ad_Links = []
-
-for ads in advertisements :
-    ad_Links.append(ads.find_element_by_tag_name("a").get_attribute('href'))
-    print(ads.find_element_by_tag_name("a").get_attribute('href'))
-
-for link in ad_Links :
-    browser.get(link)
-
-print(len(ad_Links))
+for ad in advertisements :
+    advertisment_links.append(ad.find_element_by_tag_name("a").get_attribute('href'))
