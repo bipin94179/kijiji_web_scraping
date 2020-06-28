@@ -43,9 +43,12 @@ browser.find_element_by_id("SearchKeyword").send_keys(configuration.get("keyword
 browser.find_element_by_name("SearchSubmit").click()
 
 time.sleep(20)
-browser.find_element_by_xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[1]/div/ul[3]/ul/li[2]/a").click()
+wait = WebDriverWait(browser, 10)
+element = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/div[3]/div[3]/div[2]/div[1]/div/ul[3]/ul/li[2]/a')))
+element.click()
 
 """ Reached Advertisement Page To Begin Data Scraping """
+
 time.sleep(20)
 advertisements = browser.find_elements_by_class_name("regular-ad")
 print(len(advertisements))
