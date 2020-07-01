@@ -1,9 +1,15 @@
 import time
 from datetime import datetime
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait, Select
 
-class Extract :
 
-    def extract_data(self, browser, advertisment_links, finalTimestamp) :
+class Extract:
+    url = "https://www.kijiji.ca/v-room-rental-roommate/cowichan-valley-duncan/want-to-rent/1509072438"
+
+    def extract_data(self):
+
+        url = "https://www.kijiji.ca/v-room-rental-roommate/cowichan-valley-duncan/want-to-rent/1509072438"
 
         title = []
         description = []
@@ -14,23 +20,16 @@ class Extract :
         page_link = []
         current_timestamp = 0
 
-        if finalTimestamp != "0" :
-            final_timestamp = datetime.strptime(finalTimestamp, '%b %d, %Y %I:%M %p') 
-            print(final_timestamp)
+        browser = webdriver.Chrome()
+        wait = WebDriverWait(browser, 10)
+        browser.get(url)
+        browser.maximize_window()
 
-        for link in advertisment_links:
-            browser.get(link)
-            time.sleep(10)
+        time.sleep(10)
 
-            timestamp = browser.find_element_by_class_name("datePosted-383942873").find_element_by_tag_name("span").get_attribute("title")
-            print(timestamp)
-            formatted_timestamp = datetime.strptime(timestamp, '%b %d, %Y %I:%M %p')
-            print(formatted_timestamp)
-            if finalTimestamp == "0" and current_timestamp == 0:
-                current_timestamp = timestamp
-                print(current_timestamp)
-            elif finalTimestamp != "0" :
-                if formatted_timestamp > final_timestamp :
-                    title.append(browser.find_element_by_class_name("title-2323565163").text)
-                    print(browser.find_element_by_class_name("title-2323565163").text)
-        pass
+        timestamp = browser.find_element_by_class_name(
+            "datePosted-383942873").find_element_by_tag_name("span").get_attribute("title")
+
+
+extract = Extract()
+extract.extract_data()
