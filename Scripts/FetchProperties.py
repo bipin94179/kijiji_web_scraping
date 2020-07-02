@@ -9,7 +9,7 @@ class FetchProperties :
             configuration.load(config_file)
         return configuration
 
-    def write_properties(self, updatedDate) :
+    def write_properties(self, key, value) :
         config = ConfigObj("../Config/Scraping.properties")
-        config['searchDate'] = str(updatedDate)
+        config[key] = str(value)
         config.write()
