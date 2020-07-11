@@ -1,32 +1,40 @@
 import sys
 import platform
+import os
 
 class SetupEnvironment:
 
-    def __init__(self, logger, os) :
+    def __init__(self, logger) :
         self.logger = logger
-        self.os = os
 
     def installAndUnpgradeLibraries(self) :
         try :
-            self.logger.debug("Updating pip version to support the Script functionality")
-            pip_install_stream = self.os.popen('python -m pip install --upgrade pip')
+            # Upgrading Pip Version
+            self.logger.debug("Setup Module : Updating pip version to support the Script functionality")
+            pip_install_stream = os.popen('python -m pip install --upgrade pip')
             self.logger.debug(pip_install_stream.read())
-            self.logger.debug("Preparing for Selenium Installation")
-            selenium_install_stream = self.os.popen('pip install selenium')
+
+            # Selenium Installation
+            self.logger.debug("Setup Module : Preparing for Selenium Installation")
+            selenium_install_stream = os.popen('pip install selenium')
             self.logger.debug(selenium_install_stream.read())
-            self.logger.debug("Preparing for Requests Installation")
-            requests_install_stream = self.os.popen('pip install requests')
+
+            # Requests Installation
+            self.logger.debug("Setup Module : Preparing for Requests Installation")
+            requests_install_stream = os.popen('pip install requests')
             self.logger.debug(requests_install_stream.read())
-            self.logger.debug("Preparing for BeautifulSoup Installation")
-            beautifulSoap_install_stream = self.os.popen('pip install bs4')
-            self.logger.debug(beautifulSoap_install_stream.read())
-            self.logger.debug("Preparing for JProperties Installation")
-            jproperties_install_stream = self.os.popen('pip install jproperties')
+
+            # JProperties Installation
+            self.logger.debug("Setup Module : Preparing for JProperties Installation")
+            jproperties_install_stream = os.popen('pip install jproperties')
             self.logger.debug(jproperties_install_stream.read())
-            self.logger.debug("Preparing for ConfigObj Installation")
-            configobj_install_stream = self.os.popen('pip install configobj')
+
+            # ConfigObj Installation
+            self.logger.debug("Setup Module : Preparing for ConfigObj Installation")
+            configobj_install_stream = os.popen('pip install configobj')
             self.logger.debug(configobj_install_stream.read())    
+
         except Exception :
-            self.logger.error("Environment could not be setup due to System Error. Please provide required privileges to run the Script")
+            self.logger.error("Setup Module : Environment could not be setup due to System Error")
+            self.logger.error("Setup Module : Please provide required privileges to run the Script Or Contact System Administrator")
             sys.exit()

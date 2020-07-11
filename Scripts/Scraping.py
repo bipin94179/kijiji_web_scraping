@@ -1,4 +1,9 @@
-import logging
+""" This is the Starting Point of Kijiji Web Scraping Script """
+
+from Logging import Logging
+from HandleProperties import HandleProperties
+import pathlib
+
 from datetime import datetime
 from datetime import date
 from datetime import timedelta
@@ -8,142 +13,224 @@ from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import os
-from FetchProperties import FetchProperties
 from Extract import Extract
 import math
 from selenium.webdriver.chrome.options import Options  
+import sys
+import json
 
-""" Setting Basic Logging Options """
+""" Getting Basic Logging Options """
 
-if not os.path.exists('../Logs') :
-    os.makedirs('../Logs')
-
-LOG_FILENAME = datetime.now().strftime('../Logs/scraping_app_%d_%m_%Y.log')
-logging.basicConfig(filename=LOG_FILENAME, filemode='a', format='%(asctime)s : %(levelname)s : %(message)s', datefmt='%d-%b-%y %H:%M:%S')
-logger = logging.getLogger('dev')
-logger.setLevel(logging.DEBUG)
+logger = Logging().get_logger("scraping")
 
 """ Fetching Configuration From Properties File """
 
-fetchProperties = FetchProperties()
-configuration = fetchProperties.main()
+scraping_script_path = pathlib.Path(__file__).parent.absolute()
+handleProperties = HandleProperties()
+configuration = handleProperties.read_properties(str(scraping_script_path) + "/Config/Scraping.properties")
+
+""" Initializing Variables """
+
+advertisment_links = set()
+
+total_command_line_arguments = len(sys.argv)
+logger.debug("Length of Arguments : " + str(total_command_line_arguments))
+if total_command_line_arguments > 4 or total_command_line_arguments < 4:
+    logger.debug("Scraping Module : Incorrect No Of Arguments Passed")
+    logger.debug("Scraping Module : System exiting")
+    sys.exit()
+
+province_argument = sys.argv[1]
+city_argument = sys.argv[2]
+type_argument = sys.argv[3]
 
 """ Initializing Data From Properties file to Execute Web Scraping """
 
-url = configuration.get("url").data
-# chrome_options = Options()  
-# chrome_options.add_argument("--headless")
-# browser = webdriver.Chrome(options=chrome_options)
-browser = webdriver.Chrome()
+file_path = str(scraping_script_path) + "/Scripts/Location.json"
+
+with open(file_path, "r", encoding='utf-8') as jsonFile:
+    location_dictionary = json.load(jsonFile)
+
+province_dictionary = location_dictionary["province_dict"]
+city_dictionary = location_dictionary["city_dict"]
+
+province_name = province_dictionary.get(province_argument)
+
+cities_json = city_dictionary.get(province_argument)
+city_json = cities_json.get(city_argument)
+city_name = city_json.get("name")
+
+if type_argument == "w" :
+    search_type = "Wanted"
+    wanted_json = city_json.get("wanted")
+    date_in_property = wanted_json["searchDate"]
+    finalTimestamp_in_property = wanted_json.get("finalTimestamp")
+elif type_argument == "o" :
+    search_type = "Offering"
+    offering_json = city_json.get("offering")
+    date_in_property = offering_json["searchDate"]
+    finalTimestamp_in_property = offering_json.get("finalTimestamp")
+
+logger.debug("Province is : " + str(province_dictionary))
+logger.info("Province Name is : " + str(province_name))
+logger.debug("City is : " + str(city_json))
+logger.debug("Cities are : " + str(cities_json))
+logger.info("City Name is : " + str(city_name))
+logger.info("Date from which Search Will Start : " + date_in_property)
+logger.info("Timestamp from which Search Will Start : " + finalTimestamp_in_property)
+
+# Getting Site Url from Property Configuration
+site_url = configuration.get("url").data
+logger.debug("Scraping Module : Initiating Scraping for : " + str(site_url))
+
+# Initializing Chrome Web Driver and its Configuration
+
+chrome_options = Options()  
+chrome_options.add_argument("--headless")
+chrome_options.add_argument('window-size=1920x1080')
+browser = webdriver.Chrome(options=chrome_options)
+
+logger.debug("Scraping Module : Opening Chrome To Start Data Scraping")
+# browser = webdriver.Chrome()
 wait = WebDriverWait(browser, 10)
-browser.get(url)
+browser.get(site_url)
 browser.maximize_window()
 
-""" Updating Location """
+""" Using Configuration Properties for Site Actions """
 
-time.sleep(10)
-
-province = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, configuration.get("province").data)))
+# Getting Selenium Element for Province and Clicking on it
+# province_name = configuration.get("province").data
+logger.debug("Scraping Module : Scraping Data For Province : " + str(province_name))
+province = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, province_name)))
 province.click()
 
-print("Province is : ", configuration.get("province").data)
+# Getting Selenium Element for City and Clicking on it
+# city_name = configuration.get("city").data
+logger.debug("Scraping Module : Scraping Data For City : " + str(city_name))
+city = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, city_name)))
+city.click()
 
-area = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, configuration.get("area").data)))
-area.click()
-
-print("Area is : ", configuration.get("area").data)
-
+# Getiing Selenium Element For Submitting Location and Clicking on it
 location_update = wait.until(EC.element_to_be_clickable((By.ID, 'LocUpdate')))
 location_update.click()
 
-""" Searching Keywords """
+language_update = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'headerLinkLanguage-203031519')))
+if language_update.get_attribute('title') == 'English' :
+    language_update.click()
 
-time.sleep(10)
+# Splitting Search Keywords To Intitiate Searching
+search_keywords = configuration.get("keyword").data
+keywords = search_keywords.split('||')
+logger.debug("Scraping Module : Searching Keywords Are : " + str(keywords))
 
-keywords = (configuration.get("keyword").data).split('||')
-advertisment_links = []
-
-print("Keywords", keywords)
-
+# Search Started Using For Each Loop
 for keyword in keywords :
 
-    print("Searching for : ", keyword)
+    logger.debug("Scraping Module : Initiating Search For Keyword : " + str(keyword.strip()))
 
+    # Getting Selenium Element for Search Input Box And Entering the Search Keyword
     search_box = wait.until(EC.element_to_be_clickable((By.ID, 'SearchKeyword')))
-    search_box.send_keys(keyword)
-
+    search_box.send_keys(keyword.strip())
+    
+    # Getting Selenium Element for Search Submit Button And Clicking on it
     search_button = wait.until(EC.element_to_be_clickable((By.NAME, 'SearchSubmit')))
     search_button.click()
 
+    # Waiting for Page to Load
+    logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
     time.sleep(10)
 
     """ Get Wanted Advertisements """
 
-    wanted_link = ''
+    search_type_link = ''
     real_estate_link = ''
     for_rent_link = ''
     office_link = ''
 
+    # This Method is used to Extract Specific Link from Anchor Tag Selenium Elements
     def extract_link (data_event, link_type) :
         attribute_selected_elements = browser.find_elements_by_tag_name("a")
         for selected_elements in attribute_selected_elements :
             if selected_elements.get_attribute('data-event') == data_event and link_type == selected_elements.text.split('(')[0]:
                 link = selected_elements.get_attribute('href')
-                print(link)
                 return link
         return ''
 
+    # Getting Real Estate Link And Clicking It
+    logger.debug("Scraping Module : Fetching Real Estate Advertisements")
     real_estate_link = extract_link("ChangeCategory", "Real Estate ")
     if real_estate_link != '' :    
         browser.get(real_estate_link)
 
+    logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
     time.sleep(10)
-    for_rent_link = extract_link("ChangeCategory", "For Rent ")
-    if for_rent_link != '' :    
-        browser.get(for_rent_link)
 
+    # Getting Search Type Configuration And Clicking It
+    # search_type = configuration.get("type").data
+    logger.debug("Scraping Module : Searching for : " + str(search_type) + " Advertisements")
+
+    if search_type == "Wanted" :
+        search_type_link = extract_link("wantedSelection", "Wanted ")
+    else : 
+        search_type_link = extract_link("offeringSelection", "Offering ")
+    
+    if search_type_link != '' :
+        browser.get(search_type_link)
+
+    logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
     time.sleep(10)
-    office_link = extract_link("ChangeCategory", "Commercial & Office Space for Rent ")
-    if office_link != '' :    
-        browser.get(office_link)
-
-    time.sleep(10)
-    wanted_link = extract_link("wantedSelection", "Wanted ")
-    if wanted_link != '' :
-        browser.get(wanted_link)
 
 
-
-    """ Fetching Total No Of Pages """
+    """ Calculating Total No Of Pages To Be Parsed """
 
     try :
+        # Getting Selenium Element for Total No Of Results
         showing = browser.find_element_by_class_name("showing")
         showing_text = showing.text
+        logger.debug("Scraping Module : Search Result For  : " + str(keyword.strip()) + " : is : " + str(showing_text))
         if showing_text != "No results" :
             total_advertisements = showing_text.split(' ')[5]
+            total_advertisements = total_advertisements.replace(',','')
+            logger.debug("Scraping Module : Total Advertisements Fetched : " + str(total_advertisements))
             current_advertisements = showing_text.split(' ')[3]
+            logger.debug("Scraping Module : Current Advertisements Fetched : " + str(current_advertisements))
             total_pages = math.ceil(int(total_advertisements)/int(current_advertisements))
-            print("Total Pages = " + str(total_pages))
+            logger.debug("Scraping Module : Total Pages To Be Parsed : " + str(total_pages))
         else :
+            logger.debug("Scraping Module : No Appropriate Advertisements Found")
+            logger.debug("Scraping Module : Moving On to Other Keyword If Any")
             total_pages = 0
-    except :
+    except Exception as e :
+        logger.debug("Scraping Module : Exception in Fetching Total No Of Pages")
+        print(e)
+        logger.debug("Scraping Module : System Existing")
         total_pages = 0
+        sys.exit()
+    
+    logger.debug("Scraping Module : Total Pages = " + str(total_pages))
 
     
     """ Fetching Advertisement Links """
 
     current_advertisment_links = []
     pages_traversed = 0
-    date_in_property = configuration.get("searchDate").data
+
+    # Getting Configured Date from the Configuration
     search_post_date = datetime.strptime(date_in_property, '%d/%m/%Y').date()
+    logger.debug("Scraping Module : Configured Search Date is : " + str(search_post_date))
+
     if date_in_property == '01/01/1970' :
+        logger.debug("Scraping Module : Calculating Previous 30 Days to Start Searching")
         today = date.today()
         search_post_date = today - timedelta(days=30)
+        logger.debug("Scraping Module : Calculated Search Date is : " + str(search_post_date))
 
+    # Looping Till All the Pages are Traversed
     while pages_traversed < total_pages :
         
-        time.sleep(10)
+        """ time.sleep(10) """
         
+        # Getting Selenium Element for Advertisement
         advertisements = browser.find_elements_by_class_name("regular-ad")
         
         for ad in advertisements :
@@ -162,11 +249,13 @@ for keyword in keywords :
                     wanted_ad = True
             
             if wanted_ad :
-                advertisment_links.append(ad.find_element_by_tag_name("a").get_attribute('href'))
+                advertisment_links.add(ad.find_element_by_tag_name("a").get_attribute('href'))
                 current_advertisment_links.append(ad.find_element_by_tag_name("a").get_attribute('href'))
 
         pages_traversed += 1
+        logger.debug("Scraping Module : Pages Traversed So Far : " + str(pages_traversed))
         links_processed = len(current_advertisment_links)
+        logger.debug("Scraping Module : Links Processed So Far : " + str(links_processed))
         next_page_url = ''
 
         if str(pages_traversed) != str(total_pages) and str(links_processed) == str(current_advertisements):
@@ -180,16 +269,34 @@ for keyword in keywords :
         else :
             break
 
-    print("Total Links for : ", keyword, " is : ", len(current_advertisment_links))
+    logger.debug("Scraping Module : Total Links for : " + str(keyword) + " is : " + str(len(current_advertisment_links)))
+
+    # Getting Search Box Selenium Element to Clear its Text before Inputting Next Text
     search_box = wait.until(EC.element_to_be_clickable((By.ID, 'SearchKeyword')))
     time.sleep(2)
     search_box.clear()
     
 
-print("Starting Data Scraping")
+logger.debug("Scraping Module : Starting Data Scraping")
 extract = Extract()
-extract.extract_data(browser, advertisment_links, configuration.get("finalTimestamp").data, fetchProperties)
-
+logger.debug("Scraping Module : Final Processing For All Advertisements In Progress")
+current_timestamp = extract.extract_data(browser, advertisment_links, finalTimestamp_in_property, HandleProperties(), logger, province_name, city_name)
 updated_date = (date.today() - timedelta(days=1)).strftime("%d/%m/%Y")
-fetchProperties.write_properties('searchDate', updated_date)
+if type_argument == "w" :
+    wanted_json["searchDate"] = str(updated_date)
+    wanted_json["finalTimestamp"] = str(current_timestamp)
+    city_json["wanted"] = wanted_json
+elif type_argument == "o" :
+    offering_json["searchDate"] = str(updated_date)
+    offering_json["finalTimestamp"] = str(current_timestamp)
+    city_json["offering"] = offering_json
+
+cities_json[city_argument] = city_json
+city_dictionary[province_argument] = cities_json
+location_dictionary["province_dict"] = province_dictionary
+location_dictionary["city_dict"] = city_dictionary
+
+with open(file_path, "w", encoding='utf-8') as jsonFile:
+    json.dump(location_dictionary ,jsonFile)
+logger.debug("Scraping Module : Final Processing For All Advertisements Completed")
 

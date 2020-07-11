@@ -1,0 +1,1252 @@
+{
+    "province_dict": {
+        "1": "Alberta",
+        "2": "British Columbia",
+        "3": "Manitoba",
+        "4": "New Brunswick",
+        "5": "Newfoundland",
+        "6": "Nova Scotia",
+        "7": "Ontario (A - L)",
+        "8": "Ontario (M - Z)",
+        "9": "Prince Edward Island",
+        "10": "Québec",
+        "11": "Saskatchewan",
+        "12": "Territories"
+    },
+    "city_dict": {
+        "1": {
+            "1": {
+                "name": "Banff / Canmore",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "2": {
+                "name": "Calgary",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "3": {
+                "name": "Edmonton Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "4": {
+                "name": "Fort McMurray",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "5": {
+                "name": "Grande Prairie",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "6": {
+                "name": "Lethbridge",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "7": {
+                "name": "Lloydminster",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "8": {
+                "name": "Medicine Hat",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "9": {
+                "name": "Red Deer",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            }
+        },
+        "2": {
+            "1": {
+                "name": "Cariboo Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "2": {
+                "name": "Comox Valley Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "3": {
+                "name": "Cowichan Valley / Duncan",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "4": {
+                "name": "Cranbrook",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "5": {
+                "name": "Fraser Valley",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "6": {
+                "name": "Greater Vancouver Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "7": {
+                "name": "Kamloops",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "8": {
+                "name": "Kelowna",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "9": {
+                "name": "Nanaimo",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "10": {
+                "name": "Nelson",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "11": {
+                "name": "Peace River Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "12": {
+                "name": "Port Alberni / Oceanside",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "13": {
+                "name": "Port Hardy / Port McNeill",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "14": {
+                "name": "Powell River District",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "15": {
+                "name": "Prince George",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "16": {
+                "name": "Revelstoke",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "17": {
+                "name": "Skeena-Bulkley Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "18": {
+                "name": "Sunshine Coast",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "19": {
+                "name": "Vernon",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "20": {
+                "name": "Victoria",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "21": {
+                "name": "Whistler",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            }
+        },
+        "3": {
+            "1": {
+                "name": "Brandon Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "2": {
+                "name": "Flin Flon",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "3": {
+                "name": "Thompson",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "4": {
+                "name": "Winnipeg",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            }
+        },
+        "4": {
+            "1": {
+                "name": "Bathurst",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "2": {
+                "name": "Edmundston",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "3": {
+                "name": "Fredericton",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "4": {
+                "name": "Miramichi",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "5": {
+                "name": "Moncton",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "6": {
+                "name": "Saint John",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            }
+        },
+        "5": {
+            "1": {
+                "name": "Corner Brook",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "2": {
+                "name": "Gander",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "3": {
+                "name": "Labrador",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "4": {
+                "name": "St. John's",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            }
+        },
+        "6": {
+            "1": {
+                "name": "Annapolis Valley",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "2": {
+                "name": "Bridgewater",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "3": {
+                "name": "Cape Breton",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "4": {
+                "name": "Halifax",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "5": {
+                "name": "New Glasgow",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "6": {
+                "name": "Truro",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "7": {
+                "name": "Yarmouth",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            }
+        },
+        "7": {
+            "1": {
+                "name": "Barrie",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "2": {
+                "name": "Belleville Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "3": {
+                "name": "Brantford",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "4": {
+                "name": "Brockville",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "5": {
+                "name": "Chatham-Kent",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "6": {
+                "name": "Cornwall",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "7": {
+                "name": "Guelph",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "8": {
+                "name": "Hamilton",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "9": {
+                "name": "Kapuskasing",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "10": {
+                "name": "Kenora",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "11": {
+                "name": "Kingston Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "12": {
+                "name": "Kitchener Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "13": {
+                "name": "Leamington",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "14": {
+                "name": "London",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            }
+        },
+        "8": {
+            "1": {
+                "name": "Muskoka",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "2": {
+                "name": "Norfolk County",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "3": {
+                "name": "North Bay",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "4": {
+                "name": "Ottawa / Gatineau Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "5": {
+                "name": "Owen Sound",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "6": {
+                "name": "Peterborough Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "7": {
+                "name": "Renfrew County Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "8": {
+                "name": "Sarnia Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "9": {
+                "name": "Sault Ste. Marie",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "10": {
+                "name": "St. Catharines",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "11": {
+                "name": "Sudbury",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "12": {
+                "name": "Thunder Bay",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "13": {
+                "name": "Timmins",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "14": {
+                "name": "Toronto (GTA)",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "15": {
+                "name": "Windsor Region",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "16": {
+                "name": "Woodstock",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            }
+        },
+        "9": {
+            "1": {
+                "name": "Prince Edward Island",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            }
+        },
+        "10": {
+            "1": {
+                "name": "Abitibi-Témiscamingue",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "2": {
+                "name": "Baie-Comeau",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "3": {
+                "name": "Centre-du-Québec",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "4": {
+                "name": "Chaudière-Appalaches",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "5": {
+                "name": "Chibougamau / Northern Québec",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "6": {
+                "name": "Gaspé",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "7": {
+                "name": "Granby",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "8": {
+                "name": "Greater Montréal",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "9": {
+                "name": "Lanaudière",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "10": {
+                "name": "Laurentides",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "11": {
+                "name": "Mauricie",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "12": {
+                "name": "Québec City",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "13": {
+                "name": "Rimouski / Bas-St-Laurent",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "14": {
+                "name": "Saguenay-Lac-Saint-Jean",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "15": {
+                "name": "Saint-Hyacinthe",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "16": {
+                "name": "Saint-Jean-sur-Richelieu",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "17": {
+                "name": "Sept-Îles",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "18": {
+                "name": "Sherbrooke",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            }
+        },
+        "11": {
+            "1": {
+                "name": "La Ronge",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "2": {
+                "name": "Meadow Lake",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "3": {
+                "name": "Nipawin",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "4": {
+                "name": "Prince Albert",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "5": {
+                "name": "Regina Area",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "6": {
+                "name": "Saskatoon",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "7": {
+                "name": "Swift Current",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            }
+        },
+        "12": {
+            "1": {
+                "name": "Northwest Territories",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "2": {
+                "name": "Nunavut",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            },
+            "3": {
+                "name": "Yukon",
+                "wanted" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                },
+                "offering" : {
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
+                }
+            }
+        }
+    }
+}
