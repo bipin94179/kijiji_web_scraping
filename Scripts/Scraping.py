@@ -18,6 +18,8 @@ import math
 from selenium.webdriver.chrome.options import Options  
 import sys
 import json
+from oslo_concurrency import lockutils
+from oslo_concurrency import processutils
 
 """ Getting Basic Logging Options """
 
@@ -48,14 +50,20 @@ type_argument = sys.argv[3]
 
 file_path = str(scraping_script_path) + "/Scripts/Location.json"
 
-with open(file_path, "r", encoding='utf-8') as jsonFile:
-    location_dictionary = json.load(jsonFile)
+@lockutils.synchronized('not_thread_process_safe', external=True, fair=True)
+def openFile (openMode, location_dictionary) :
+    if openMode == "r" :
+        with open(file_path, openMode, encoding='utf-8') as jsonFile:
+            return json.load(jsonFile)
+    if openMode == "w" :
+        with open(file_path, openMode, encoding='utf-8') as jsonFile:
+            json.dump(location_dictionary ,jsonFile)
 
+
+location_dictionary = openFile("r", "")
 province_dictionary = location_dictionary["province_dict"]
 city_dictionary = location_dictionary["city_dict"]
-
 province_name = province_dictionary.get(province_argument)
-
 cities_json = city_dictionary.get(province_argument)
 city_json = cities_json.get(city_argument)
 city_name = city_json.get("name")
@@ -282,6 +290,26 @@ extract = Extract()
 logger.debug("Scraping Module : Final Processing For All Advertisements In Progress")
 current_timestamp = extract.extract_data(browser, advertisment_links, finalTimestamp_in_property, HandleProperties(), logger, province_name, city_name)
 updated_date = (date.today() - timedelta(days=1)).strftime("%d/%m/%Y")
+
+location_dictionary = openFile("r", "")
+province_dictionary = location_dictionary["province_dict"]
+city_dictionary = location_dictionary["city_dict"]
+province_name = province_dictionary.get(province_argument)
+cities_json = city_dictionary.get(province_argument)
+city_json = cities_json.get(city_argument)
+city_name = city_json.get("name")
+
+if type_argument == "w" :
+    search_type = "Wanted"
+    wanted_json = city_json.get("wanted")
+    date_in_property = wanted_json["searchDate"]
+    finalTimestamp_in_property = wanted_json.get("finalTimestamp")
+elif type_argument == "o" :
+    search_type = "Offering"
+    offering_json = city_json.get("offering")
+    date_in_property = offering_json["searchDate"]
+    finalTimestamp_in_property = offering_json.get("finalTimestamp")
+
 if type_argument == "w" :
     wanted_json["searchDate"] = str(updated_date)
     wanted_json["finalTimestamp"] = str(current_timestamp)
@@ -296,7 +324,7 @@ city_dictionary[province_argument] = cities_json
 location_dictionary["province_dict"] = province_dictionary
 location_dictionary["city_dict"] = city_dictionary
 
-with open(file_path, "w", encoding='utf-8') as jsonFile:
-    json.dump(location_dictionary ,jsonFile)
+openFile("w", location_dictionary)
 logger.debug("Scraping Module : Final Processing For All Advertisements Completed")
-
+browser.close()
+browser.quit()

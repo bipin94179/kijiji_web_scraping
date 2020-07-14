@@ -34,6 +34,11 @@ class SetupEnvironment:
             configobj_install_stream = os.popen('pip install configobj')
             self.logger.debug(configobj_install_stream.read())    
 
+            # Oslo Concurrency Installation
+            self.logger.debug("Setup Module : Preparing for Oslo Concurrency Installation")
+            configobj_install_stream = os.popen('pip install oslo.concurrency')
+            self.logger.debug(configobj_install_stream.read())
+
         except Exception :
             self.logger.error("Setup Module : Environment could not be setup due to System Error")
             self.logger.error("Setup Module : Please provide required privileges to run the Script Or Contact System Administrator")
