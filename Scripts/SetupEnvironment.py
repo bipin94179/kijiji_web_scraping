@@ -36,8 +36,10 @@ class SetupEnvironment:
 
             # Oslo Concurrency Installation
             self.logger.debug("Setup Module : Preparing for Oslo Concurrency Installation")
-            configobj_install_stream = os.popen('pip install oslo.concurrency')
-            self.logger.debug(configobj_install_stream.read())
+            oslo_install_stream = os.popen('pip install wheel')
+            self.logger.debug(oslo_install_stream.read())
+            oslo_install_stream = os.popen('pip install oslo.concurrency')
+            self.logger.debug(oslo_install_stream.read())
 
         except Exception :
             self.logger.error("Setup Module : Environment could not be setup due to System Error")

@@ -37,7 +37,7 @@ advertisment_links = set()
 
 total_command_line_arguments = len(sys.argv)
 logger.debug("Length of Arguments : " + str(total_command_line_arguments))
-if total_command_line_arguments > 4 or total_command_line_arguments < 4:
+if total_command_line_arguments > 5 or total_command_line_arguments < 5:
     logger.debug("Scraping Module : Incorrect No Of Arguments Passed")
     logger.debug("Scraping Module : System exiting")
     sys.exit()
@@ -45,12 +45,13 @@ if total_command_line_arguments > 4 or total_command_line_arguments < 4:
 province_argument = sys.argv[1]
 city_argument = sys.argv[2]
 type_argument = sys.argv[3]
+search_keywords = sys.argv[4]
 
 """ Initializing Data From Properties file to Execute Web Scraping """
 
 file_path = str(scraping_script_path) + "/Scripts/Location.json"
 
-@lockutils.synchronized('not_thread_process_safe', external=True, fair=True)
+@lockutils.synchronized('not_thread_process_safe', external=True, fair=True, lock_path=str(scraping_script_path) + "/Lock/")
 def openFile (openMode, location_dictionary) :
     if openMode == "r" :
         with open(file_path, openMode, encoding='utf-8') as jsonFile:
@@ -127,8 +128,7 @@ if language_update.get_attribute('title') == 'English' :
     language_update.click()
 
 # Splitting Search Keywords To Intitiate Searching
-search_keywords = configuration.get("keyword").data
-keywords = search_keywords.split('||')
+keywords = search_keywords.split(',')
 logger.debug("Scraping Module : Searching Keywords Are : " + str(keywords))
 
 # Search Started Using For Each Loop

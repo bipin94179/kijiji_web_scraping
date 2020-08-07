@@ -29,8 +29,8 @@
             "2": {
                 "name": "Calgary",
                 "wanted": {
-                    "searchDate": "11/07/2020",
-                    "finalTimestamp": "2020-07-11T11:50:09.000Z"
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
                 },
                 "offering": {
                     "searchDate": "01/01/1970",
@@ -890,8 +890,8 @@
             "14": {
                 "name": "Toronto (GTA)",
                 "wanted": {
-                    "searchDate": "11/07/2020",
-                    "finalTimestamp": "2020-07-12T03:50:07.000Z"
+                    "searchDate": "01/01/1970",
+                    "finalTimestamp": "0"
                 },
                 "offering": {
                     "searchDate": "01/01/1970",
@@ -958,7 +958,7 @@
                 }
             },
             "3": {
-                "name": "Centre-du-Qu\u00e9bec",
+                "name": "Centre-du-Quebec",
                 "wanted": {
                     "searchDate": "01/01/1970",
                     "finalTimestamp": "0"

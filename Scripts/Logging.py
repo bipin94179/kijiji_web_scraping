@@ -34,7 +34,7 @@ class Logging :
             if not os.path.exists(logs_directory_path) :
                 os.makedirs(logs_directory_path)
                 
-            self.log_file_name = datetime.now().strftime(str(logs_directory_path) + str(log_file_name) + '_%d_%m_%Y_%H:%M:%S' + '.log')
+            self.log_file_name = datetime.now().strftime(str(logs_directory_path) + str(log_file_name) + '_%d_%m_%Y_%H_%M_%S' + '.log')
             return self.basic_logging_configuration()
 
         except OSError :
