@@ -97,11 +97,16 @@ logger.debug("Scraping Module : Initiating Scraping for : " + str(site_url))
 chrome_options = Options()  
 chrome_options.add_argument("--headless")
 chrome_options.add_argument('window-size=1920x1080')
+chrome_options.add_argument('--ignore-certificate-errors')
+chrome_options.add_argument('--ignore-ssl-errors')
 browser = webdriver.Chrome(options=chrome_options)
 
 logger.debug("Scraping Module : Opening Chrome To Start Data Scraping")
 # browser = webdriver.Chrome()
 wait = WebDriverWait(browser, 10)
+browser.refresh()
+browser.delete_all_cookies()
+browser.refresh()
 browser.get(site_url)
 browser.maximize_window()
 
@@ -154,24 +159,23 @@ for keyword in keywords :
     real_estate_link = ''
     for_rent_link = ''
     office_link = ''
+    proceed_with_scraping = True
 
     # This Method is used to Extract Specific Link from Anchor Tag Selenium Elements
     def extract_link (data_event, link_type) :
         attribute_selected_elements = browser.find_elements_by_tag_name("a")
-        for selected_elements in attribute_selected_elements :
-            if selected_elements.get_attribute('data-event') == data_event and link_type == selected_elements.text.split('(')[0]:
-                link = selected_elements.get_attribute('href')
-                return link
-        return ''
-
-    # Getting Real Estate Link And Clicking It
-    logger.debug("Scraping Module : Fetching Real Estate Advertisements")
-    real_estate_link = extract_link("ChangeCategory", "Real Estate ")
-    if real_estate_link != '' :    
-        browser.get(real_estate_link)
-
-    logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
-    time.sleep(10)
+        if link_type == "Real Estate " or link_type == "Wanted " or link_type == "Offering ":
+            for selected_elements in attribute_selected_elements :
+                if selected_elements.get_attribute('data-event') == data_event and link_type == selected_elements.text.split('(')[0]:
+                    link = selected_elements.get_attribute('href')
+                    return link
+            return ''
+        elif link_type == "For Rent" or link_type == "Commercial & Other":
+            for selected_elements in attribute_selected_elements :
+                if selected_elements.find_elements_by_class_name("textContainer-4227985904") and selected_elements.find_elements_by_class_name("textContainer-4227985904")[0].find_element_by_tag_name('div').text == link_type:
+                    link = selected_elements.get_attribute('href')
+                    return link
+            return ''
 
     # Getting Search Type Configuration And Clicking It
     # search_type = configuration.get("type").data
@@ -184,105 +188,145 @@ for keyword in keywords :
     
     if search_type_link != '' :
         browser.get(search_type_link)
+    else :
+        proceed_with_scraping = False
+        logger.debug("Scraping Module : Stopping Scraping as no " + str(search_type) + " advertisements found")
 
     logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
     time.sleep(10)
 
+    # Getting Real Estate Link And Clicking It
+    logger.debug("Scraping Module : Fetching Real Estate Advertisements")
+    real_estate_link = extract_link("ChangeCategory", "Real Estate ")
+    if real_estate_link != '' :    
+        browser.get(real_estate_link)
+    else :
+        proceed_with_scraping = False
+        logger.debug("Scraping Module : Stopping Scraping as no Real Estate advertisements found")
+
+    logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
+    time.sleep(10)
+
+    logger.debug("Scraping Module : Fetching Real Estate Advertisements For Rent")
+    for_rent_link = extract_link("", "For Rent")
+    if for_rent_link != '' :    
+        browser.get(for_rent_link)
+    else :
+        proceed_with_scraping = False
+        logger.debug("Scraping Module : Stopping Scraping as no Real Estate For Rent advertisements found")
+
+    logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
+    time.sleep(10)
+
+    logger.debug("Scraping Module : Fetching Real Estate Advertisements For Commercial Spaces")
+    commercial_space_link = extract_link("", "Commercial & Other")
+    if commercial_space_link != '' :    
+        browser.get(commercial_space_link)
+    else :
+        proceed_with_scraping = False
+        logger.debug("Scraping Module : Stopping Scraping as no Real Estate For Rent - Commericial And Office Space advertisements found")
+
+    logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
+    time.sleep(10)
 
     """ Calculating Total No Of Pages To Be Parsed """
 
-    try :
-        # Getting Selenium Element for Total No Of Results
-        showing = browser.find_element_by_class_name("showing")
-        showing_text = showing.text
-        logger.debug("Scraping Module : Search Result For  : " + str(keyword.strip()) + " : is : " + str(showing_text))
-        if showing_text != "No results" :
-            total_advertisements = showing_text.split(' ')[5]
-            total_advertisements = total_advertisements.replace(',','')
-            logger.debug("Scraping Module : Total Advertisements Fetched : " + str(total_advertisements))
-            current_advertisements = showing_text.split(' ')[3]
-            logger.debug("Scraping Module : Current Advertisements Fetched : " + str(current_advertisements))
-            total_pages = math.ceil(int(total_advertisements)/int(current_advertisements))
-            logger.debug("Scraping Module : Total Pages To Be Parsed : " + str(total_pages))
-        else :
-            logger.debug("Scraping Module : No Appropriate Advertisements Found")
-            logger.debug("Scraping Module : Moving On to Other Keyword If Any")
-            total_pages = 0
-    except Exception as e :
-        logger.debug("Scraping Module : Exception in Fetching Total No Of Pages")
-        print(e)
-        logger.debug("Scraping Module : System Existing")
-        total_pages = 0
-        sys.exit()
-    
-    logger.debug("Scraping Module : Total Pages = " + str(total_pages))
-
-    
-    """ Fetching Advertisement Links """
-
-    current_advertisment_links = []
-    pages_traversed = 0
-
-    # Getting Configured Date from the Configuration
-    search_post_date = datetime.strptime(date_in_property, '%d/%m/%Y').date()
-    logger.debug("Scraping Module : Configured Search Date is : " + str(search_post_date))
-
-    if date_in_property == '01/01/1970' :
-        logger.debug("Scraping Module : Calculating Previous 30 Days to Start Searching")
-        today = date.today()
-        search_post_date = today - timedelta(days=30)
-        logger.debug("Scraping Module : Calculated Search Date is : " + str(search_post_date))
-
-    # Looping Till All the Pages are Traversed
-    while pages_traversed < total_pages :
-        
-        """ time.sleep(10) """
-        
-        # Getting Selenium Element for Advertisement
-        advertisements = browser.find_elements_by_class_name("regular-ad")
-        
-        for ad in advertisements :
-            wanted_ad = False
-            ad_date = ad.find_element_by_class_name("date-posted").text
-            if "ago" in ad_date :
-                wanted_ad = True
-            elif "Yesterday" in ad_date :
-                today = date.today()
-                yesterday = today - timedelta(days=1)
-                if yesterday >= search_post_date :
-                    wanted_ad = True
+    if proceed_with_scraping :
+        try :
+            # Getting Selenium Element for Total No Of Results
+            showing = browser.find_element_by_class_name("showing")
+            showing_text = showing.text
+            logger.debug("Scraping Module : Search Result For  : " + str(keyword.strip()) + " : is : " + str(showing_text))
+            if showing_text != "No results" :
+                total_advertisements = showing_text.split(' ')[5]
+                total_advertisements = total_advertisements.replace(',','')
+                logger.debug("Scraping Module : Total Advertisements Fetched : " + str(total_advertisements))
+                current_advertisements = showing_text.split(' ')[3]
+                logger.debug("Scraping Module : Current Advertisements Fetched : " + str(current_advertisements))
+                total_pages = math.ceil(int(total_advertisements)/int(current_advertisements))
+                logger.debug("Scraping Module : Total Pages To Be Parsed : " + str(total_pages))
             else :
-                ad_posted_date = datetime.strptime(ad_date, '%d/%m/%Y').date()
-                if ad_posted_date >= search_post_date :
-                    wanted_ad = True
-            
-            if wanted_ad :
-                advertisment_links.add(ad.find_element_by_tag_name("a").get_attribute('href'))
-                current_advertisment_links.append(ad.find_element_by_tag_name("a").get_attribute('href'))
-
-        pages_traversed += 1
-        logger.debug("Scraping Module : Pages Traversed So Far : " + str(pages_traversed))
-        links_processed = len(current_advertisment_links)
-        logger.debug("Scraping Module : Links Processed So Far : " + str(links_processed))
-        next_page_url = ''
-
-        if str(pages_traversed) != str(total_pages) and str(links_processed) == str(current_advertisements):
-            pagination_element = browser.find_element_by_class_name("pagination")
+                logger.debug("Scraping Module : No Appropriate Advertisements Found")
+                logger.debug("Scraping Module : Moving On to Other Keyword If Any")
+                total_pages = 0
+        except Exception as e :
+            logger.debug("Scraping Module : Exception in Fetching Total No Of Pages")
+            print(e)
+            logger.debug("Scraping Module : System Existing")
+            total_pages = 0
+            sys.exit()
         
-            for link in pagination_element.find_elements_by_tag_name("a") :
-                if "Next" == link.get_attribute("title") :
-                    next_page_url = link.get_attribute("href")
-                    break
-            browser.get(next_page_url)
-        else :
-            break
+        logger.debug("Scraping Module : Total Pages = " + str(total_pages))
 
-    logger.debug("Scraping Module : Total Links for : " + str(keyword) + " is : " + str(len(current_advertisment_links)))
+        
+        """ Fetching Advertisement Links """
 
-    # Getting Search Box Selenium Element to Clear its Text before Inputting Next Text
-    search_box = wait.until(EC.element_to_be_clickable((By.ID, 'SearchKeyword')))
-    time.sleep(2)
-    search_box.clear()
+        current_advertisment_links = []
+        pages_traversed = 0
+
+        # Getting Configured Date from the Configuration
+        search_post_date = datetime.strptime(date_in_property, '%d/%m/%Y').date()
+        logger.debug("Scraping Module : Configured Search Date is : " + str(search_post_date))
+
+        if date_in_property == '01/01/1970' :
+            logger.debug("Scraping Module : Calculating Previous 30 Days to Start Searching")
+            today = date.today()
+            search_post_date = today - timedelta(days=30)
+            logger.debug("Scraping Module : Calculated Search Date is : " + str(search_post_date))
+
+        # Looping Till All the Pages are Traversed
+        while pages_traversed < total_pages :
+            
+            """ time.sleep(10) """
+            
+            # Getting Selenium Element for Advertisement
+            advertisements = browser.find_elements_by_class_name("regular-ad")
+            
+            for ad in advertisements :
+                wanted_ad = False
+                ad_date = ad.find_element_by_class_name("date-posted").text
+                if "ago" in ad_date :
+                    wanted_ad = True
+                elif "Yesterday" in ad_date :
+                    today = date.today()
+                    yesterday = today - timedelta(days=1)
+                    if yesterday >= search_post_date :
+                        wanted_ad = True
+                else :
+                    ad_posted_date = datetime.strptime(ad_date, '%d/%m/%Y').date()
+                    if ad_posted_date >= search_post_date :
+                        wanted_ad = True
+                
+                if wanted_ad :
+                    advertisment_links.add(ad.find_element_by_tag_name("a").get_attribute('href'))
+                    current_advertisment_links.append(ad.find_element_by_tag_name("a").get_attribute('href'))
+
+            pages_traversed += 1
+            logger.debug("Scraping Module : Pages Traversed So Far : " + str(pages_traversed))
+            links_processed = len(current_advertisment_links)
+            logger.debug("Scraping Module : Links Processed So Far : " + str(links_processed))
+            next_page_url = ''
+
+            if str(pages_traversed) != str(total_pages) and str(links_processed) == str(current_advertisements):
+                pagination_element = browser.find_element_by_class_name("pagination")
+            
+                for link in pagination_element.find_elements_by_tag_name("a") :
+                    if "Next" == link.get_attribute("title") :
+                        next_page_url = link.get_attribute("href")
+                        break
+                browser.get(next_page_url)
+            else :
+                break
+
+        logger.debug("Scraping Module : Total Links for : " + str(keyword) + " is : " + str(len(current_advertisment_links)))
+
+        # Getting Search Box Selenium Element to Clear its Text before Inputting Next Text
+        search_box = wait.until(EC.element_to_be_clickable((By.ID, 'SearchKeyword')))
+        time.sleep(2)
+        search_box.clear()
+    else :
+        browser.close()
+        browser.quit()
     
 
 logger.debug("Scraping Module : Starting Data Scraping")
@@ -326,5 +370,6 @@ location_dictionary["city_dict"] = city_dictionary
 
 openFile("w", location_dictionary)
 logger.debug("Scraping Module : Final Processing For All Advertisements Completed")
-browser.close()
-browser.quit()
+if proceed_with_scraping :
+    browser.close()
+    browser.quit()
