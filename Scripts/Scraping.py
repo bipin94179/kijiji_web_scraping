@@ -21,6 +21,7 @@ from Extract import Extract
 from selenium.webdriver.chrome.options import Options
 from oslo_concurrency import lockutils
 from selenium.common.exceptions import TimeoutException, WebDriverException
+from selenium.webdriver.common.keys import Keys
 
 # Getting Basic Logging Options
 logger = Logging().get_logger("scraping")
@@ -32,6 +33,7 @@ configuration = handleProperties.read_properties(str(scraping_script_path) + "/C
 
 # Initializing Variables using Command Line Variables
 advertisment_links = set()
+print(sys.argv)
 total_command_line_arguments = len(sys.argv)
 logger.debug("Length of Arguments : " + str(total_command_line_arguments))
 if total_command_line_arguments > 5 or total_command_line_arguments < 5:
@@ -122,32 +124,37 @@ browser.refresh()
 browser.get(site_url)
 browser.maximize_window()
 
-# Using Configuration Properties for Site Actions
-# Getting Selenium Element for Province and Clicking on it
 try:
-    logger.debug("Scraping Module : Scraping Data For Province : " + str(province_name))
-    province = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, province_name)))
-    province.click()
+    location_box = wait.until(EC.element_to_be_clickable((By.ID, 'SearchLocationPicker')))
+    location_box.click()
 except TimeoutException as timeoutException:
-    logger.error("Province Name could not be Found. Check your Internet Connection and Re-run the Program")
-    raise Exception("Province Name could not be Found. Check your Internet Connection and Re-run the Program")
+    logger.error("Issue while Searching for Advertisements. Check your Internet Connection and Re-run the Program")
+    raise Exception("Issue while Searching for Advertisements. Check your Internet Connection and Re-run the Program")
 
-# Getting Selenium Element for City and Clicking on it
 try:
-    logger.debug("Scraping Module : Scraping Data For City : " + str(city_name))
-    city = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, city_name)))
-    city.click()
+    address_box = wait.until(EC.element_to_be_clickable((By.NAME, 'address')))
+    address_box.send_keys(city_name + ', ' + province_name)
+    time.sleep(5)
+    address_box.send_keys(Keys.ENTER)
 except TimeoutException as timeoutException:
-    logger.error("City Name could not be Found. Check your Internet Connection and Re-run the Program")
-    raise Exception("City Name could not be Found. Check your Internet Connection and Re-run the Program")
+    logger.error("Issue while Searching for Advertisements. Check your Internet Connection and Re-run the Program")
+    raise Exception("Issue while Searching for Advertisements. Check your Internet Connection and Re-run the Program")
 
-# Getiing Selenium Element For Submitting Location and Clicking on it
+time.sleep(5)
 try:
-    location_update = wait.until(EC.element_to_be_clickable((By.ID, 'LocUpdate')))
-    location_update.click()
+    full_address = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'checkbox-2823340902')))
+    full_address.click()
 except TimeoutException as timeoutException:
-    logger.error("Issue while updating Location. Check your Internet Connection and Re-run the Program")
-    raise Exception("Issue while updating Location. Check your Internet Connection and Re-run the Program")
+    logger.error("Issue while Searching for Advertisements. Check your Internet Connection and Re-run the Program")
+    raise Exception("Issue while Searching for Advertisements. Check your Internet Connection and Re-run the Program")
+
+time.sleep(5)
+try:
+    apply = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'submitButton-2124651659')))
+    apply.click()
+except TimeoutException as timeoutException:
+    logger.error("Issue while Searching for Advertisements. Check your Internet Connection and Re-run the Program")
+    raise Exception("Issue while Searching for Advertisements. Check your Internet Connection and Re-run the Program")
 
 # Update Language to English
 try:
@@ -159,8 +166,88 @@ except TimeoutException as timeoutException:
     raise Exception("Issue while updating Language to English. Check your Internet Connection and Re-run the Program")
 
 # Splitting Search Keywords To Intitiate Searching
-keywords = search_keywords.split(',')
+keywords = search_keywords.replace("_", " ").split(',')
 logger.debug("Scraping Module : Searching Keywords Are : " + str(keywords))
+
+# Get Wanted Advertisements
+# Link Type Variable Initialization
+search_type_link = ''
+real_estate_link = ''
+for_rent_link = ''
+office_link = ''
+proceed_with_scraping = True
+
+# This Method is used to Extract Specific Link from Anchor Tag Selenium Elements
+def extract_link(data_event, link_type):
+    attribute_selected_elements = browser.find_elements_by_tag_name("a")
+    if link_type == "Real Estate " or link_type == "Wanted " or link_type == "Offering ":
+        for selected_elements in attribute_selected_elements:
+            if selected_elements.get_attribute('data-event') == data_event and link_type == \
+                    selected_elements.text.split('(')[0]:
+                link = selected_elements.get_attribute('href')
+                return link
+        return ''
+    elif link_type == "For Rent" or link_type == "Commercial & Other":
+        for selected_elements in attribute_selected_elements:
+            if selected_elements.find_elements_by_class_name("textContainer-4227985904") and \
+                    selected_elements.find_elements_by_class_name("textContainer-4227985904")[
+                        0].find_element_by_tag_name('div').text == link_type:
+                link = selected_elements.get_attribute('href')
+                return link
+        return ''
+
+# Getting Search Type Configuration And Clicking It
+# search_type = configuration.get("type").data
+logger.debug("Scraping Module : Searching for : " + str(search_type) + " Advertisements")
+
+if search_type == "Wanted":
+    search_type_link = extract_link("wantedSelection", "Wanted ")
+else:
+    search_type_link = extract_link("offeringSelection", "Offering ")
+
+if search_type_link != '':
+    browser.get(search_type_link)
+else:
+    proceed_with_scraping = False
+    logger.debug("Scraping Module : Stopping Scraping as no " + str(search_type) + " advertisements found")
+
+logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
+time.sleep(10)
+
+# Getting Real Estate Link And Clicking It
+logger.debug("Scraping Module : Fetching Real Estate Advertisements")
+real_estate_link = extract_link("ChangeCategory", "Real Estate ")
+if real_estate_link != '':
+    browser.get(real_estate_link)
+else:
+    proceed_with_scraping = False
+    logger.debug("Scraping Module : Stopping Scraping as no Real Estate advertisements found")
+
+logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
+time.sleep(10)
+
+logger.debug("Scraping Module : Fetching Real Estate Advertisements For Rent")
+for_rent_link = extract_link("", "For Rent")
+if for_rent_link != '':
+    browser.get(for_rent_link)
+else:
+    proceed_with_scraping = False
+    logger.debug("Scraping Module : Stopping Scraping as no Real Estate For Rent advertisements found")
+
+logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
+time.sleep(10)
+
+logger.debug("Scraping Module : Fetching Real Estate Advertisements For Commercial Spaces")
+commercial_space_link = extract_link("", "Commercial & Other")
+if commercial_space_link != '':
+    browser.get(commercial_space_link)
+else:
+    proceed_with_scraping = False
+    logger.debug(
+        "Scraping Module : Stopping Scraping as no Real Estate For Rent - Commericial And Office Space advertisements found")
+
+logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
+time.sleep(10)
 
 # Search Started Using For Each Loop
 for keyword in keywords:
@@ -173,101 +260,20 @@ for keyword in keywords:
         search_box.send_keys(keyword.strip())
     except TimeoutException as timeoutException:
         logger.error("Issue while Searching for Advertisements. Check your Internet Connection and Re-run the Program")
-        raise Exception("Issue while Searching for Advertisements. Check your Internet Connection and Re-run the Program")
+        raise Exception(
+            "Issue while Searching for Advertisements. Check your Internet Connection and Re-run the Program")
 
     # Getting Selenium Element for Search Submit Button And Clicking on it
     try:
         search_button = wait.until(EC.element_to_be_clickable((By.NAME, 'SearchSubmit')))
         search_button.click()
     except TimeoutException as timeoutException:
-        logger.error("Issue while Proceeding with Searching for Advertisements. Check your Internet Connection and Re-run the Program")
-        raise Exception("Issue while Proceeding with Searching for Advertisements. Check your Internet Connection and Re-run the Program")
+        logger.error(
+            "Issue while Proceeding with Searching for Advertisements. Check your Internet Connection and Re-run the Program")
+        raise Exception(
+            "Issue while Proceeding with Searching for Advertisements. Check your Internet Connection and Re-run the Program")
 
     # Waiting for Page to Load
-    logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
-    time.sleep(10)
-
-    # Get Wanted Advertisements
-    # Link Type Variable Initialization
-    search_type_link = ''
-    real_estate_link = ''
-    for_rent_link = ''
-    office_link = ''
-    proceed_with_scraping = True
-
-    # This Method is used to Extract Specific Link from Anchor Tag Selenium Elements
-    def extract_link(data_event, link_type):
-        try:
-            attribute_selected_elements = browser.find_elements_by_tag_name("a")
-            if link_type == "Real Estate " or link_type == "Wanted " or link_type == "Offering ":
-                for selected_elements in attribute_selected_elements:
-                    if selected_elements.get_attribute('data-event') == data_event and link_type == \
-                            selected_elements.text.split('(')[0]:
-                        link = selected_elements.get_attribute('href')
-                        return link
-                return ''
-            elif link_type == "For Rent" or link_type == "Commercial & Other":
-                for selected_elements in attribute_selected_elements:
-                    if selected_elements.find_elements_by_class_name("textContainer-4227985904") and \
-                            selected_elements.find_elements_by_class_name("textContainer-4227985904")[
-                                0].find_element_by_tag_name('div').text == link_type:
-                        link = selected_elements.get_attribute('href')
-                        return link
-                return ''
-        except TimeoutException:
-            logger.error(str(link_type)," Link Could not be Found. Check your Internet Connection and Re-run the Program")
-            raise Exception(str(link_type)," Link Could not be Found. Check your Internet Connection and Re-run the Program")
-
-    # Getting Search Type Configuration And Clicking It
-    # search_type = configuration.get("type").data
-    logger.debug("Scraping Module : Searching for : " + str(search_type) + " Advertisements")
-
-    if search_type == "Wanted":
-        search_type_link = extract_link("wantedSelection", "Wanted ")
-    else:
-        search_type_link = extract_link("offeringSelection", "Offering ")
-
-    if search_type_link != '':
-        browser.get(search_type_link)
-    else:
-        proceed_with_scraping = False
-        logger.debug("Scraping Module : Stopping Scraping as no " + str(search_type) + " advertisements found")
-
-    logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
-    time.sleep(10)
-
-    # Getting Real Estate Link And Clicking It
-    logger.debug("Scraping Module : Fetching Real Estate Advertisements")
-    real_estate_link = extract_link("ChangeCategory", "Real Estate ")
-    if real_estate_link != '':
-        browser.get(real_estate_link)
-    else:
-        proceed_with_scraping = False
-        logger.debug("Scraping Module : Stopping Scraping as no Real Estate advertisements found")
-
-    logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
-    time.sleep(10)
-
-    logger.debug("Scraping Module : Fetching Real Estate Advertisements For Rent")
-    for_rent_link = extract_link("", "For Rent")
-    if for_rent_link != '':
-        browser.get(for_rent_link)
-    else:
-        proceed_with_scraping = False
-        logger.debug("Scraping Module : Stopping Scraping as no Real Estate For Rent advertisements found")
-
-    logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
-    time.sleep(10)
-
-    logger.debug("Scraping Module : Fetching Real Estate Advertisements For Commercial Spaces")
-    commercial_space_link = extract_link("", "Commercial & Other")
-    if commercial_space_link != '':
-        browser.get(commercial_space_link)
-    else:
-        proceed_with_scraping = False
-        logger.debug(
-            "Scraping Module : Stopping Scraping as no Real Estate For Rent - Commericial And Office Space advertisements found")
-
     logger.debug("Scraping Module : Waiting for Page to Load : Timeout 10 Seconds")
     time.sleep(10)
 
@@ -415,3 +421,5 @@ logger.debug("Scraping Module : Final Processing For All Advertisements Complete
 if proceed_with_scraping:
     browser.close()
     browser.quit()
+
+

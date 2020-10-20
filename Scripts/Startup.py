@@ -12,12 +12,11 @@ province_dict = {
     "New Brunswick": "4",
     "Newfoundland": "5",
     "Nova Scotia": "6",
-    "Ontario (A - L)": "7",
-    "Ontario (M - Z)": "8",
-    "Prince Edward Island": "9",
-    "Qu\u00e9bec": "10",
-    "Saskatchewan": "11",
-    "Territories": "12"
+    "Ontario": "7",
+    "Prince Edward Island": "8",
+    "Qu\u00e9bec": "9",
+    "Saskatchewan": "10",
+    "Territories": "11"
 }
 
 city_dict = {
@@ -98,25 +97,23 @@ city_dict = {
         "Kingston Area": "11",
         "Kitchener Area": "12",
         "Leamington": "13",
-        "London": "14"
-    },
-    "8": {
-        "Muskoka": "1",
-        "Norfolk County": "2",
-        "North Bay": "3",
-        "Ottawa / Gatineau Area": "4",
-        "Owen Sound": "5",
-        "Peterborough Area": "6",
-        "Renfrew County Area": "7",
-        "Sarnia Area": "8",
-        "Sault Ste. Marie": "9",
-        "St. Catharines": "10",
-        "Sudbury": "11",
-        "Thunder Bay": "12",
-        "Timmins": "13",
-        "Toronto (GTA)": "14",
-        "Windsor Region": "15",
-        "Woodstock": "16"
+        "London": "14",
+        "Muskoka": "15",
+        "Norfolk County": "16",
+        "North Bay": "17",
+        "Ottawa / Gatineau Area": "18",
+        "Owen Sound": "19",
+        "Peterborough Area": "20",
+        "Renfrew County Area": "21",
+        "Sarnia Area": "22",
+        "Sault Ste. Marie": "23",
+        "St. Catharines": "24",
+        "Sudbury": "25",
+        "Thunder Bay": "26",
+        "Timmins": "27",
+        "Toronto (GTA)": "28",
+        "Windsor Region": "29",
+        "Woodstock": "30"
     },
     "9": {
         "Prince Edward Island": "1"
@@ -210,15 +207,12 @@ def enableCities(event):
         city_choosen['values'] = (
             ' Annapolis Valley', ' Bridgewater', ' Cape Breton', " Halifax", ' New Glasgow', ' Truro', ' Yarmouth'
         )
-    elif province_choosen.get().strip() == "Ontario (A - L)":
+    elif province_choosen.get().strip() == "Ontario":
         city_choosen['values'] = (
             ' Barrie', ' Belleville Area', ' Brantford', " Brockville", ' Chatham-Kent', ' Cornwall',
             ' Guelph', ' Hamilton', ' Kapuskasing', ' Kenora', ' Kingston Area', ' Kitchener Area',
-            ' Leamington', ' London'
-        )
-    elif province_choosen.get().strip() == "Ontario (M - Z)":
-        city_choosen['values'] = (
-            ' Muskoka', ' Norfolk County', ' North Bay', " Ottawa / Gatineau Area", ' Owen Sound', ' Peterborough Area',
+            ' Leamington', ' London', ' Muskoka', ' Norfolk County', ' North Bay', " Ottawa / Gatineau Area",
+            ' Owen Sound', ' Peterborough Area',
             ' Renfrew County Area', ' Sarnia Area', ' Sault Ste. Marie', ' St. Catharines', ' Sudbury', ' Thunder Bay',
             ' Timmins', ' Toronto (GTA)', ' Windsor Region', ' Woodstock'
         )
@@ -276,7 +270,7 @@ def execute_scraping():
                 subprocess.check_call(
                     "python Scraping.py " + str(province_dict[province_choosen.get().strip()]) + " " + str(
                         (city_dict[province_dict[province_choosen.get().strip()]])[
-                            city_choosen.get().strip()]) + " w " + str(finalKeywords), shell=True)
+                            city_choosen.get().strip()]) + " w " + str(finalKeywords).replace(" ", "_"), shell=True)
                 label = ttk.Label(window, text="Process Completed", font=("Calibri", 15))
                 label.place(relx="0.35", rely="0.7")
                 progressBar.destroy()
@@ -286,7 +280,7 @@ def execute_scraping():
                 bbtn = ttk.Button(window, text="Ok", command=destroy_window)
                 bbtn.place(relx="0.4", rely="0.9")
             except subprocess.CalledProcessError:
-                label = ttk.Label(window, text="Error Occured. Please check the Logs", font=("Calibri", 15))    
+                label = ttk.Label(window, text="Error Occured. Please check the Logs", font=("Calibri", 15))
                 label.place(relx="0.25", rely="0.7")
                 progressBar.destroy()
                 progressBBar = ttk.Progressbar(window, orient='horizontal', length=400, mode='determinate')
@@ -300,9 +294,11 @@ def execute_scraping():
 
     elif advertisement_type.get().strip() == "Offering":
         try:
-            subprocess.check_call("python Scraping.py " + str(province_dict[province_choosen.get().strip()]) + " " + str(
-                (city_dict[province_dict[province_choosen.get().strip()]])[city_choosen.get().strip()]) + " o " + str(
-                finalKeywords), shell=True)
+            subprocess.check_call(
+                "python Scraping.py " + str(province_dict[province_choosen.get().strip()]) + " " + str(
+                    (city_dict[province_dict[province_choosen.get().strip()]])[
+                        city_choosen.get().strip()]) + " o " + str(
+                    finalKeywords), shell=True)
             label = ttk.Label(window, text="Process Completed", font=("Calibri", 15))
             label.place(relx="0.35", rely="0.7")
             progressBar.destroy()
@@ -360,7 +356,7 @@ province_choosen = ttk.Combobox(window, width=35, height=30, textvariable=tkinte
 province_choosen.bind("<<ComboboxSelected>>", enableCities)
 province_choosen['values'] = (
     ' Alberta', ' British Columbia', ' Manitoba', ' New Brunswick', ' Newfoundland', ' Nova Scotia',
-    ' Ontario (A - L)', ' Ontario (M - Z)', ' Prince Edward Island', ' Qu\u00e9bec', ' Saskatchewan', ' Territories'
+    ' Ontario', ' Prince Edward Island', ' Qu\u00e9bec', ' Saskatchewan', ' Territories'
 )
 
 # City : Dropdown, Values, Positioning
