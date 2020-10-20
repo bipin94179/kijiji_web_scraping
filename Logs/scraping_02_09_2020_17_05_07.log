@@ -1,0 +1,37 @@
+02-Sep-20 17:05:07 : DEBUG : Length of Arguments : 5
+02-Sep-20 17:05:07 : DEBUG : Province is : {'1': 'Alberta', '2': 'British Columbia', '3': 'Manitoba', '4': 'New Brunswick', '5': 'Newfoundland', '6': 'Nova Scotia', '7': 'Ontario (A - L)', '8': 'Ontario (M - Z)', '9': 'Prince Edward Island', '10': 'Québec', '11': 'Saskatchewan', '12': 'Territories'}
+02-Sep-20 17:05:07 : INFO : Province Name is : British Columbia
+02-Sep-20 17:05:07 : DEBUG : City is : {'name': 'Greater Vancouver Area', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}
+02-Sep-20 17:05:07 : DEBUG : Cities are : {'1': {'name': 'Cariboo Area', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '2': {'name': 'Comox Valley Area', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '3': {'name': 'Cowichan Valley / Duncan', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '4': {'name': 'Cranbrook', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '5': {'name': 'Fraser Valley', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '6': {'name': 'Greater Vancouver Area', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '7': {'name': 'Kamloops', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '8': {'name': 'Kelowna', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '9': {'name': 'Nanaimo', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '10': {'name': 'Nelson', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '11': {'name': 'Peace River Area', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '12': {'name': 'Port Alberni / Oceanside', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '13': {'name': 'Port Hardy / Port McNeill', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '14': {'name': 'Powell River District', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '15': {'name': 'Prince George', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '16': {'name': 'Revelstoke', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '17': {'name': 'Skeena-Bulkley Area', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '18': {'name': 'Sunshine Coast', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '19': {'name': 'Vernon', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '20': {'name': 'Victoria', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '21': {'name': 'Whistler', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}}
+02-Sep-20 17:05:07 : INFO : City Name is : Greater Vancouver Area
+02-Sep-20 17:05:07 : INFO : Date from which Search Will Start : 01/01/1970
+02-Sep-20 17:05:07 : INFO : Timestamp from which Search Will Start : 0
+02-Sep-20 17:05:07 : DEBUG : Scraping Module : Initiating Scraping for : https://www.kijiji.ca
+02-Sep-20 17:05:10 : DEBUG : Scraping Module : Opening Chrome To Start Data Scraping
+02-Sep-20 17:05:27 : DEBUG : Scraping Module : Scraping Data For Province : British Columbia
+02-Sep-20 17:05:27 : DEBUG : Scraping Module : Scraping Data For City : Greater Vancouver Area
+02-Sep-20 17:05:39 : DEBUG : Scraping Module : Searching Keywords Are : ['office']
+02-Sep-20 17:05:39 : DEBUG : Scraping Module : Initiating Search For Keyword : office
+02-Sep-20 17:05:56 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:06:06 : DEBUG : Scraping Module : Searching for : Wanted Advertisements
+02-Sep-20 17:06:12 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:06:22 : DEBUG : Scraping Module : Fetching Real Estate Advertisements
+02-Sep-20 17:06:30 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:06:40 : DEBUG : Scraping Module : Fetching Real Estate Advertisements For Rent
+02-Sep-20 17:06:44 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:06:54 : DEBUG : Scraping Module : Fetching Real Estate Advertisements For Commercial Spaces
+02-Sep-20 17:06:58 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:07:08 : DEBUG : Scraping Module : Search Result For  : office : is : Showing 1 - 5 of 5 results
+02-Sep-20 17:07:08 : DEBUG : Scraping Module : Total Advertisements Fetched : 5
+02-Sep-20 17:07:08 : DEBUG : Scraping Module : Current Advertisements Fetched : 5
+02-Sep-20 17:07:08 : DEBUG : Scraping Module : Total Pages To Be Parsed : 1
+02-Sep-20 17:07:08 : DEBUG : Scraping Module : Total Pages = 1
+02-Sep-20 17:07:08 : DEBUG : Scraping Module : Configured Search Date is : 1970-01-01
+02-Sep-20 17:07:08 : DEBUG : Scraping Module : Calculating Previous 30 Days to Start Searching
+02-Sep-20 17:07:08 : DEBUG : Scraping Module : Calculated Search Date is : 2020-08-03
+02-Sep-20 17:07:08 : DEBUG : Scraping Module : Pages Traversed So Far : 1
+02-Sep-20 17:07:08 : DEBUG : Scraping Module : Links Processed So Far : 3
+02-Sep-20 17:07:08 : DEBUG : Scraping Module : Total Links for : office is : 3
+02-Sep-20 17:07:10 : DEBUG : Scraping Module : Starting Data Scraping
+02-Sep-20 17:07:10 : DEBUG : Scraping Module : Final Processing For All Advertisements In Progress
+02-Sep-20 17:07:39 : DEBUG : Scraping Module : Final Processing For All Advertisements Completed

@@ -1,0 +1,29 @@
+02-Sep-20 17:02:10 : DEBUG : Length of Arguments : 5
+02-Sep-20 17:02:10 : DEBUG : Province is : {'1': 'Alberta', '2': 'British Columbia', '3': 'Manitoba', '4': 'New Brunswick', '5': 'Newfoundland', '6': 'Nova Scotia', '7': 'Ontario (A - L)', '8': 'Ontario (M - Z)', '9': 'Prince Edward Island', '10': 'Québec', '11': 'Saskatchewan', '12': 'Territories'}
+02-Sep-20 17:02:10 : INFO : Province Name is : Alberta
+02-Sep-20 17:02:10 : DEBUG : City is : {'name': 'Banff / Canmore', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}
+02-Sep-20 17:02:10 : DEBUG : Cities are : {'1': {'name': 'Banff / Canmore', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '2': {'name': 'Calgary', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '3': {'name': 'Edmonton Area', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '4': {'name': 'Fort McMurray', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '5': {'name': 'Grande Prairie', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '6': {'name': 'Lethbridge', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '7': {'name': 'Lloydminster', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '8': {'name': 'Medicine Hat', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '9': {'name': 'Red Deer', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}}
+02-Sep-20 17:02:10 : INFO : City Name is : Banff / Canmore
+02-Sep-20 17:02:10 : INFO : Date from which Search Will Start : 01/01/1970
+02-Sep-20 17:02:10 : INFO : Timestamp from which Search Will Start : 0
+02-Sep-20 17:02:10 : DEBUG : Scraping Module : Initiating Scraping for : https://www.kijiji.ca
+02-Sep-20 17:02:13 : DEBUG : Scraping Module : Opening Chrome To Start Data Scraping
+02-Sep-20 17:02:31 : DEBUG : Scraping Module : Scraping Data For Province : Alberta
+02-Sep-20 17:02:31 : DEBUG : Scraping Module : Scraping Data For City : Banff / Canmore
+02-Sep-20 17:02:44 : DEBUG : Scraping Module : Searching Keywords Are : ['Office']
+02-Sep-20 17:02:44 : DEBUG : Scraping Module : Initiating Search For Keyword : Office
+02-Sep-20 17:02:58 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:03:08 : DEBUG : Scraping Module : Searching for : Wanted Advertisements
+02-Sep-20 17:03:11 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:03:21 : DEBUG : Scraping Module : Fetching Real Estate Advertisements
+02-Sep-20 17:03:21 : DEBUG : Scraping Module : Stopping Scraping as no Real Estate advertisements found
+02-Sep-20 17:03:21 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:03:31 : DEBUG : Scraping Module : Fetching Real Estate Advertisements For Rent
+02-Sep-20 17:03:32 : DEBUG : Scraping Module : Stopping Scraping as no Real Estate For Rent advertisements found
+02-Sep-20 17:03:32 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:03:42 : DEBUG : Scraping Module : Fetching Real Estate Advertisements For Commercial Spaces
+02-Sep-20 17:03:42 : DEBUG : Scraping Module : Stopping Scraping as no Real Estate For Rent - Commericial And Office Space advertisements found
+02-Sep-20 17:03:42 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:03:52 : DEBUG : Scraping Module : Starting Data Scraping
+02-Sep-20 17:03:52 : DEBUG : Scraping Module : Final Processing For All Advertisements In Progress
+02-Sep-20 17:03:52 : DEBUG : Scraping Module : Final Processing For All Advertisements Completed

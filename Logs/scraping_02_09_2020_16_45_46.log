@@ -1,0 +1,9 @@
+02-Sep-20 16:45:46 : DEBUG : Length of Arguments : 5
+02-Sep-20 16:45:46 : DEBUG : Province is : {'1': 'Alberta', '2': 'British Columbia', '3': 'Manitoba', '4': 'New Brunswick', '5': 'Newfoundland', '6': 'Nova Scotia', '7': 'Ontario (A - L)', '8': 'Ontario (M - Z)', '9': 'Prince Edward Island', '10': 'Québec', '11': 'Saskatchewan', '12': 'Territories'}
+02-Sep-20 16:45:46 : INFO : Province Name is : Manitoba
+02-Sep-20 16:45:46 : DEBUG : City is : {'name': 'Winnipeg', 'wanted': {'searchDate': '31/08/2020', 'finalTimestamp': '2020-08-10T16:29:37.000Z'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}
+02-Sep-20 16:45:46 : DEBUG : Cities are : {'1': {'name': 'Brandon Area', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '2': {'name': 'Flin Flon', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '3': {'name': 'Thompson', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '4': {'name': 'Winnipeg', 'wanted': {'searchDate': '31/08/2020', 'finalTimestamp': '2020-08-10T16:29:37.000Z'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}}
+02-Sep-20 16:45:46 : INFO : City Name is : Winnipeg
+02-Sep-20 16:45:46 : INFO : Date from which Search Will Start : 31/08/2020
+02-Sep-20 16:45:46 : INFO : Timestamp from which Search Will Start : 2020-08-10T16:29:37.000Z
+02-Sep-20 16:45:46 : DEBUG : Scraping Module : Initiating Scraping for : https://www.kijiji.ca

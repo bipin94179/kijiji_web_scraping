@@ -27,7 +27,7 @@ class Extract :
                 final_city_name = final_city_name + name.strip()
         fileName = datetime.now().strftime(str(data_directory_path) + "Data_" + province_name + "_" + final_city_name + "_" + '_%d_%m_%Y_%H_%M_%S' + '.csv')
         
-        with open(fileName, 'w+', newline='') as csvfile:
+        with open(fileName, 'w+', newline='', encoding='utf-8') as csvfile:
             output_csv = csv.writer(csvfile, quoting=csv.QUOTE_ALL, delimiter=',')
 
             row.append("Unique Id")

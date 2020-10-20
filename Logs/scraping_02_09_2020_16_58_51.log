@@ -1,0 +1,35 @@
+02-Sep-20 16:58:51 : DEBUG : Length of Arguments : 5
+02-Sep-20 16:58:51 : DEBUG : Province is : {'1': 'Alberta', '2': 'British Columbia', '3': 'Manitoba', '4': 'New Brunswick', '5': 'Newfoundland', '6': 'Nova Scotia', '7': 'Ontario (A - L)', '8': 'Ontario (M - Z)', '9': 'Prince Edward Island', '10': 'Québec', '11': 'Saskatchewan', '12': 'Territories'}
+02-Sep-20 16:58:51 : INFO : Province Name is : Manitoba
+02-Sep-20 16:58:51 : DEBUG : City is : {'name': 'Winnipeg', 'wanted': {'searchDate': '31/08/2020', 'finalTimestamp': '2020-08-10T16:29:37.000Z'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}
+02-Sep-20 16:58:51 : DEBUG : Cities are : {'1': {'name': 'Brandon Area', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '2': {'name': 'Flin Flon', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '3': {'name': 'Thompson', 'wanted': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}, '4': {'name': 'Winnipeg', 'wanted': {'searchDate': '31/08/2020', 'finalTimestamp': '2020-08-10T16:29:37.000Z'}, 'offering': {'searchDate': '01/01/1970', 'finalTimestamp': '0'}}}
+02-Sep-20 16:58:51 : INFO : City Name is : Winnipeg
+02-Sep-20 16:58:51 : INFO : Date from which Search Will Start : 31/08/2020
+02-Sep-20 16:58:51 : INFO : Timestamp from which Search Will Start : 2020-08-10T16:29:37.000Z
+02-Sep-20 16:58:51 : DEBUG : Scraping Module : Initiating Scraping for : https://www.kijiji.ca
+02-Sep-20 16:58:54 : DEBUG : Scraping Module : Opening Chrome To Start Data Scraping
+02-Sep-20 16:59:12 : DEBUG : Scraping Module : Scraping Data For Province : Manitoba
+02-Sep-20 16:59:12 : DEBUG : Scraping Module : Scraping Data For City : Winnipeg
+02-Sep-20 16:59:25 : DEBUG : Scraping Module : Searching Keywords Are : ['office']
+02-Sep-20 16:59:25 : DEBUG : Scraping Module : Initiating Search For Keyword : office
+02-Sep-20 16:59:44 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 16:59:54 : DEBUG : Scraping Module : Searching for : Wanted Advertisements
+02-Sep-20 17:00:01 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:00:11 : DEBUG : Scraping Module : Fetching Real Estate Advertisements
+02-Sep-20 17:00:28 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:00:38 : DEBUG : Scraping Module : Fetching Real Estate Advertisements For Rent
+02-Sep-20 17:00:43 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:00:53 : DEBUG : Scraping Module : Fetching Real Estate Advertisements For Commercial Spaces
+02-Sep-20 17:00:57 : DEBUG : Scraping Module : Waiting for Page to Load : Timeout 10 Seconds
+02-Sep-20 17:01:07 : DEBUG : Scraping Module : Search Result For  : office : is : Showing 1 - 13 of 13 results
+02-Sep-20 17:01:07 : DEBUG : Scraping Module : Total Advertisements Fetched : 13
+02-Sep-20 17:01:07 : DEBUG : Scraping Module : Current Advertisements Fetched : 13
+02-Sep-20 17:01:07 : DEBUG : Scraping Module : Total Pages To Be Parsed : 1
+02-Sep-20 17:01:07 : DEBUG : Scraping Module : Total Pages = 1
+02-Sep-20 17:01:07 : DEBUG : Scraping Module : Configured Search Date is : 2020-08-31
+02-Sep-20 17:01:07 : DEBUG : Scraping Module : Pages Traversed So Far : 1
+02-Sep-20 17:01:07 : DEBUG : Scraping Module : Links Processed So Far : 0
+02-Sep-20 17:01:07 : DEBUG : Scraping Module : Total Links for : office is : 0
+02-Sep-20 17:01:10 : DEBUG : Scraping Module : Starting Data Scraping
+02-Sep-20 17:01:10 : DEBUG : Scraping Module : Final Processing For All Advertisements In Progress
+02-Sep-20 17:01:10 : DEBUG : Scraping Module : Final Processing For All Advertisements Completed
